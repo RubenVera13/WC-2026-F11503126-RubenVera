@@ -1,4 +1,4 @@
-# Wireless Communications Study Notes Template
+# Wireless Communications Study Notes 
 ###### tags: `Wireless Communications`
 
 ## :notebook_with_decorative_cover: Personal Information
@@ -9,7 +9,7 @@
 - Research: 
 - Briefly summarize your background and why you want to take this course:
 
-I am a third year electromechanical engineering student from the UPTP (Universidad Politecnica Taiwan Paraguay), currently at iterchenge in the mechanical engineering deparment at the NTUST. I want to take this course becuase
+I am a third year electromechanical engineering student from the UPTP (Universidad Politecnica Taiwan Paraguay), currently at iterchenge in the mechanical engineering deparment at the NTUST. I want to take this course because
 
 
 ## :notebook_with_decorative_cover: Assignment
