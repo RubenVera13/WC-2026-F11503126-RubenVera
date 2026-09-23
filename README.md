@@ -2,8 +2,10 @@
 ###### tags: `Wireless Communications`
 
 ## :notebook_with_decorative_cover: Personal Information
-- Name:Ruben Dario Vera Martinez
-- Number:F11503126
+- Name:
+      Ruben Dario Vera Martinez
+- Number:
+      F11503126
 - Research: 
 - Briefly summarize your background and why you want to take this course:
 
