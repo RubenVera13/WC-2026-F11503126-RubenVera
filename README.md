@@ -1,16 +1,13 @@
-# WC-2026-F11503126-RubenVera
 # Wireless Communications Study Notes Template
 ###### tags: `Wireless Communications`
 
 ## :notebook_with_decorative_cover: Personal Information
-- Name:侯偉信(HOU,WEI XIN)
-- number:M11502002
-- Research Direction: integrated sensing and communication
+- Name:Ruben Dario Vera Martinez
+- number:F11503126
+- Research 
 - Briefly summarize your background and why you want to take this course:
 
-I am currently pursuing my master’s degree, with my research focusing on next-generation wireless communication technologies, particularly 5G and 6G. My current research topic is Integrated Sensing and Communication (ISAC), which has allowed me to explore how communication and sensing technologies can be integrated into future wireless networks. Through my studies and projects, I have also gained experience in programming and have become familiar with cloud platforms such as Microsoft Azure. Recently, I have been studying 5G core networks and related open-source platforms, including free5GC, OpenAirInterface (OAI), and FlexRIC, to better understand how modern wireless communication systems are implemented in practice.
-
-I want to take this Wireless Communication course because I would like to strengthen my fundamental and practical knowledge of wireless communication. Although my current research is related to 5G/6G and ISAC, I believe that having a stronger understanding of wireless communication principles will help me better understand the technologies behind my research. I also want to learn new concepts that I have not encountered in my previous courses and improve my existing technical skills. In particular, I hope this course can help me connect theoretical knowledge with practical implementations and give me a stronger foundation for my future research in 5G, 6G, and ISAC.
+I am a third year electromechanical engineering student from the UPTP (Universidad Politecnica Taiwan Paraguay), currently at iterchenge in the mechanical engineering deparment at the NTUST. I want to take this course becuase
 
 
 ## :notebook_with_decorative_cover: Assignment
@@ -20,7 +17,7 @@ I want to take this Wireless Communication course because I would like to streng
     - **Deadline : 12:00, Sep. 28**
     - Goal:
 In this lab, you will know the basic Wireshark operation and how to capture the packages
-    - delivery: [侯偉信 Assignment Lab0](https://hackmd.io/@andrewbartholomeo/ByCFRQcYze).
+    - delivery: [).
     -  [ ] Peer review : [Vote the Top3](https://docs.google.com/forms/d/e/1FAIpQLSeY8uVnBUwJ6l6CwQ6arx3JHthTJupHBeA2WwyD-EUIYqHHrg/viewform?usp=publish-editor) (DL: 23:59, Sep. 30)
 
     
