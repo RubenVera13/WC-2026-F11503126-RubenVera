@@ -9,5 +9,5 @@
 4. Select the install destination for the progam.
 5. Wait untill the installation is finished and reboot the device .
 
-!(LAB0/Images/Screenshot 2026-09-22 204445.png)
-!(images/Screenshot 2026-09-22 204445.png)
+!(LAB0/Images/Image1.png)
+!(images/Image2.png)
