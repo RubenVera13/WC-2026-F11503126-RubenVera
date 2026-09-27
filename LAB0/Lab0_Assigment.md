@@ -9,5 +9,5 @@
 4. Select the install destination for the progam.
 5. Wait untill the installation is finished and reboot the device .
 
-![Installation](LAB0/Images/Image1.png)
-![Installation2](images/Image2.png)
+![Installation](Images/Image1.png)
+![Installation2](Images/Image2.png)
