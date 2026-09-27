@@ -53,12 +53,6 @@ Applied these filters individually: ngap, gtp, icmp
 | N3 | gNB and UPF |GTP-U| Cariess user plane traffic between the gNB and UPF. |
 
 
-![NGAP](images/ngap.png)
-
-![GTP](images/gtp.png)
-
-![ICMP](images/icmp.png)
-
 ## 6. Analyze the RRC Connection Establishment
 
 ## RRC Connection Establishment
