@@ -12,5 +12,16 @@
 ![Installation](Images/Image1.png)
 ![Installation2](Images/Image2.png)
 ## 1. Website Packet Capture 
+### Which website did you access?
+### What are the IP address and port number of the website server?
+### What are the IP address and source port number of your PC when initially accessing the website?
+### What is the process of the TCP three-way handshake?
 ## 2. DNS Packet Analysis
+### What are the IP address and port number of the DNS server?
+### What is the domain name in the DNS query?
+### Which protocols does this DNS packet use? List the protocols from Layer 2 to Layer 5 in the TCP/IP five-layer model:
 ## 3. Access an HTTP page
+### Which HTTP page did you access?
+### What are the IP address and port number of the server hosting the page?
+### What is the HTTP request method?
+### What is the HTTP response status code, and what does it mean?
