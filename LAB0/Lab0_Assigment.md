@@ -8,3 +8,7 @@
 3. Choose the components that you want to install.
 4. Select the install destination for the progam.
 5. Wait untill the installation is finished and reboot the device .
+
+![First capture](images/Screenshot 2026-09-22 204423.png)
+
+![Second Capture](images/Screenshot 2026-09-22 204445.png)
