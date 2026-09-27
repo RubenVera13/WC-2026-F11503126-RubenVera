@@ -1,7 +1,7 @@
-# Wireless Communications Lab0
+# Wireless Communications Lab
 ###### tags: `Wireless Communications`
 
-## :notebook_with_decorative_cover: Lab 1: Analyzing UE–gNB Connectivity in an OAI 5G SA Network
+# Lab 1: Analyzing UE–gNB Connectivity in an OAI 5G SA Network
 
 ## 1. Lab Overview
 
