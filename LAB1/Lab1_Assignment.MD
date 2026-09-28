@@ -56,9 +56,13 @@ Applied these filters individually: ngap, gtp, icmp
 |---|---|---|---|
 | N1 | UE and AMF |NAS-5GS| Carries NAS signal logically between the UE and AMF. The signal goes through the gNB|
 | N2 | gNB and AMF |NGAP| Carries controls plane signaling between the gNB and AMF. |
-| N3 | gNB and UPF |GTP-U| Cariess user plane traffic between the gNB and UPF. |
+| N3 | gNB and UPF |GTP-U| Caries user plane traffic between the gNB and UPF. |
 
+![NGAP](images/ngap.png)
 
+![GTP](images/gtp.png)
+
+![ICMP](images/icmp.png)
 ## 6. Analyze the RRC Connection Establishment
 
 ## RRC Connection Establishment
