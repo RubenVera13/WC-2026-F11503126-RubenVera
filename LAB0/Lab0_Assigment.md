@@ -38,8 +38,16 @@ The client sends an ACK packet to acknowledge the server's SYN-ACK.
 After this packet, the TCP connection is established.
 ## 2. DNS Packet Analysis
 ### What are the IP address and port number of the DNS server?
+- DNS server IP address: `140.118.31.99`
+- DNS server port number: `53`
+![DNS Packet](images/dns.png)
 ### What is the domain name in the DNS query?
+www.wikipedia.org
 ### Which protocols does this DNS packet use? List the protocols from Layer 2 to Layer 5 in the TCP/IP five-layer model:
+- Layer 2: Link Layer: Ethernet II
+- Layer 3: Network Layer: Internet Protocol Version 4 IPv4
+- Layer 4: Transport Layer: User Datagram Protocol UDP
+- Layer 5: Application Layer: Domain Name System DNS
 ## 3. Access an HTTP page
 ### Which HTTP page did you access?
 ### What are the IP address and port number of the server hosting the page?
