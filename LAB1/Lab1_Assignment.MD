@@ -150,7 +150,7 @@ Packet `490` is between gNB (`192.168.70.129`) and UPF (`192.168.70.134`)
 #### What IPv4 address was assigned to the UE?
 `10.0.0.2`
 #### How many ICMP Echo Request/Reply pairs are present? 
-There are seq from 1 to 10 request and replies
+The capture contains 10 ICMP Echo Request/Reply pairs. The first encapsulated pair is frames 490/495; the corresponding decapsulated packets at the UPF are frames 493/494.
 #### What does the successful Echo Reply prove about the UE connection? 
 Ot proves that the UE has working user-plane connect. The UE can send IP traffic through the gNB and UPF to the Data Network and receive data 
 ## 9. Final UE Connection Sequence
