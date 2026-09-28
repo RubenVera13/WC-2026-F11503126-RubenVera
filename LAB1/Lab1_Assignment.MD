@@ -72,6 +72,7 @@ Applied these filters individually: ngap, gtp, icmp
 | RRCSetupRequest | UE to gNB | UL-CCCH / SRB0 | The UE request establishsment of RRC conection with gNB. | `104` |
 | RRCSetup | gNB to UE | DL-CCCH / SRB0 | The gNB takes the requesta and give RRC configuration that is needed to establissh the connection, with SRB1 config. | `105` |
 | RRCSetupComplete | UE to gNB | UL-DCCH / SRB1 | The UE confirmed that RRC setup is compelete and takes the NAS registration request towards the 5G core. | `108` |
+
 ![NR-RRC](images/nrrrc2.png)
 ### Answer the following questions:
 #### What is the establishment cause in RRCSetupRequest?
