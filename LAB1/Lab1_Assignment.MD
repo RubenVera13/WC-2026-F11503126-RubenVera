@@ -18,7 +18,6 @@ OAI-5G-Wireshark-Profile.zip and oai-5g-combined.pcapng
 ## 3. Install the OAI-5G Wireshark Profile
 ![Install profiles](images/profiles.png)
 ## 4. Open and Verify the Capture
-a
 - The Protocol column shows NR RRC. And the Info column contains messages:
 - RRC Setup Request
 - RRC Setup
@@ -91,7 +90,7 @@ UE has establsished an RRC connection with gNB, but the connection is not with t
 ## 7. Connect RRC Signaling to NGAP and NAS
 The UE exchanges NAS signaling with the AMF through the gNB. On the radio side, the NAS message is carried by RRC. The gNB then forwards it to the AMF through NGAP.
 
-![Registration request](images/registration_request.png)
+![Registration request](images/request.png)
 
 - RRCSetupComplete
 
