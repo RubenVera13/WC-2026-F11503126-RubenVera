@@ -9,7 +9,7 @@
 - Research: 
 - Briefly summarize your background and why you want to take this course:
 
-I am a third year electromechanical engineering student from the UPTP (Universidad Politecnica Taiwan Paraguay), currently at iterchenge in the mechanical engineering deparment at the NTUST. I want to take this course because
+I am a third year electromechanical engineering student from the UPTP (Universidad Politecnica Taiwan Paraguay), currently at iterchenge in the mechanical engineering deparment at the NTUST. I want to take this course because modern engineering systems increasingly rely on wireless communication for monitoring, control, automation, and the connection of intelligent devices.
 
 
 ## :notebook_with_decorative_cover: Assignment
