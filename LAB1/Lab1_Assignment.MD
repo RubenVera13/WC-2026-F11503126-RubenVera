@@ -174,7 +174,7 @@ Security Mode,
 Registration Accept and Complete, 
 PDU Session establishment, 
 GTP-U ping
-![Sequence diagram](images/diagram.jpg)
+![Sequence diagram](images/Diagram.jpg)
 Checkpoint 6: Final Sequence Diagram — 5 points
 Include the required components and signaling stages. — 3 points
 Clearly distinguish control-plane and user-plane traffic. — 2 points
