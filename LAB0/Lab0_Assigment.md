@@ -21,7 +21,7 @@
 - PC IP address: `192.168.0.102`
 - Source port number: `64144`
 ### What is the process of the TCP three-way handshake? Identify the SYN, SYN-ACK, and ACK packets. Briefly explain the purpose of each packet.
-![Server port and PC IP adress and source port number and SYN pacet](images/image3.png)
+![Server port and PC IP adress and source port number and SYN pacet](Images/image3.png)
 #### SYN
 Packet number: `158`
 `192.168.0.102 → 103.102.166.224`
@@ -40,7 +40,7 @@ After this packet, the TCP connection is established.
 ### What are the IP address and port number of the DNS server?
 - DNS server IP address: `140.118.31.99`
 - DNS server port number: `53`
-![DNS Packet](images/dns.png)
+![DNS Packet](Images/dns.png)
 ### What is the domain name in the DNS query?
 www.wikipedia.org
 ### Which protocols does this DNS packet use? List the protocols from Layer 2 to Layer 5 in the TCP/IP five-layer model:
