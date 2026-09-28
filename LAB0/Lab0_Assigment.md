@@ -23,22 +23,19 @@
 ### What is the process of the TCP three-way handshake? Identify the SYN, SYN-ACK, and ACK packets. Briefly explain the purpose of each packet.
 ![Server port and PC IP adress and source port number and SYN pacet](images/image3.png)
 #### SYN
-Packet number: `57`
-`192.168.0.102 → 54.80.103.139`
+Packet number: `158`
+`192.168.0.102 → 103.102.166.224`
 The client sends a SYN packet to request the establishment of a TCP
 connection with the server.
-![SYN, packet numer 194](images/syn_194.png)
 #### SYN-ACK
-Packet number: `59`
-`54.192.248.52:443 → 10.119.3.237:55437`
+Packet number: `159`
+`103.102.166.224 → 192.168.0.102`
 The server sends a SYN-ACK packet to acknowledge the client's SYN and indicate that it is ready to establish the connection.
-![SYN-ACK, packet numer 195](images/syn_195.png)
 #### ACK
-Packet number: `60`
-`10.119.3.237:55437 → 54.192.248.52:443`
+Packet number: `160`
+`192.168.0.102 → 103.102.166.224`
 The client sends an ACK packet to acknowledge the server's SYN-ACK.
 After this packet, the TCP connection is established.
-![ACK, packet numer 196](images/syn_ack.png)
 ## 2. DNS Packet Analysis
 ### What are the IP address and port number of the DNS server?
 ### What is the domain name in the DNS query?
