@@ -120,13 +120,39 @@ No, it is not. The UE send the `Registration Request` inside`RRCSetupComplete` t
 
 ## 8. Verify the UE IP Address and User-Plane Traffic
 
-Find the PDU Session Establishment Accept and record the UE address:
+FFind the PDU Session Establishment Accept and record the UE address:
 
 - With filter gtp || icmp
 
 | Field | Observed value |
 |---|---|
 | UE IPv4 address | `10.0.0.2` |
+
+![PDU](images/PDU.png)
+
+- echo Request: packet `490`
+- echo Reply: packet `495`
+- UE IP address: `10.0.0.2`
+- data network IP address: `192.168.70.135`
+
+Packet `490` is between gNB (`192.168.70.129`) and UPF (`192.168.70.134`)
+
+- echo request: 
+
+![Echo request](images/gtp2.png)
+
+
+- echo reply: 
+
+![Echo reply](images/echo.png)
+
+
+#### What IPv4 address was assigned to the UE?
+`10.0.0.2`
+#### How many ICMP Echo Request/Reply pairs are present? 
+There are seq from 1 to 10 request and replies
+#### What does the successful Echo Reply prove about the UE connection? 
+Ot proves that the UE has working user-plane connect. The UE can send IP traffic through the gNB and UPF to the Data Network and receive data 
 ## 9. Final UE Connection Sequence
 
 Create one sequence diagram containing:
@@ -148,7 +174,7 @@ Security Mode,
 Registration Accept and Complete, 
 PDU Session establishment, 
 GTP-U ping
-
+![Sequence diagram](images/diagram.png)
 Checkpoint 6: Final Sequence Diagram — 5 points
 Include the required components and signaling stages. — 3 points
 Clearly distinguish control-plane and user-plane traffic. — 2 points
