@@ -13,13 +13,13 @@
 ![Installation2](Images/Image2.png)
 ## 1. Website Packet Capture 
 ### Which website did you access?
-  www.abc.com.py
+  [www.abc.com.py](https://www.wikipedia.org)
 ### What are the IP address and port number of the website server?
 - Server IP address: `35.201.82.166`
 - Server port: `443` for HTTPS
 ### What are the IP address and source port number of your PC when initially accessing the website?
 - PC IP address: `192.168.0.102`
-- Source port number: `63427`
+- Source port number: `64144`
 ### What is the process of the TCP three-way handshake? Identify the SYN, SYN-ACK, and ACK packets. Briefly explain the purpose of each packet.
 ![Server port and PC IP adress and source port number and SYN pacet](images/image3.png)
 #### SYN
