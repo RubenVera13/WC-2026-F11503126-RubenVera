@@ -29,6 +29,9 @@ a
 These are the 5G NR Radio Resource Control messages.
 
 - Checkpoint 1: Wireshark Setup
+![Select profiles](images/profiles.png)
+![Opened capture](images/open.png)
+![NR RRC messages](images/nrrrc.png)
 ## 5. Identify the Basic 5G SA Architecture
 Applied these filters individually: ngap, gtp, icmp
 
