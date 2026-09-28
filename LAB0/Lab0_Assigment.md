@@ -50,6 +50,17 @@ www.wikipedia.org
 - Layer 5: Application Layer: Domain Name System DNS
 ## 3. Access an HTTP page
 ### Which HTTP page did you access?
+http://www.gzxyzn.com/Article/bjrk2/1644.html
 ### What are the IP address and port number of the server hosting the page?
+- Server IP address: `61.183.8.129`
+- Server port number: `80`
 ### What is the HTTP request method?
+The HTTP request method is: `GET`
+Packet `222` contains: `GET /Article/bjrk2/1644.html HTTP/1.1`
+The GET method is used by the client to request a resource from the
+web server.
 ### What is the HTTP response status code, and what does it mean?
+The HTTP response status code is: `200 OK`
+Packet `230` contains: `HTTP/1.1 200 OK`
+The `200 OK` status code means that the request was successfully done.
+  ![HTTP page](Images/http.png)
