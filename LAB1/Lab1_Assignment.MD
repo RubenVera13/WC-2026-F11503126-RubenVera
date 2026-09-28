@@ -14,7 +14,9 @@ After completing this lab, you should be able to:
 - Verify that the UE receives an IP address and exchanges user-plane traffic.
 
 ## 2. Required Files
+OAI-5G-Wireshark-Profile.zip and oai-5g-combined.pcapng
 ## 3. Install the OAI-5G Wireshark Profile
+![Install profiles](images/profiles.png)
 ## 4. Open and Verify the Capture
 
 - The Protocol column shows NR RRC. And the Info column contains messages:
