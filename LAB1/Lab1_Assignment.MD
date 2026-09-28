@@ -43,17 +43,17 @@ Applied these filters individually: ngap, gtp, icmp
 
 | Component | IP address | Evidence from the capture |
 |---|---|---|
-| UE PDU address | `10.0.0.2` | Source of the inside ICMP Echo Request in the Packet 490 |
+| UE PDU address | `10.0.0.2` | Inner IPv4 source in GTP-U frame 490; UE IP Address IE in PFCP frame 166 |
 | gNB | `192.168.70.129` | NGAP endpoint towards the AMF and outer GTP-U tunnel endpoint   |
-| AMF | `192.168.70.132` | NGAP endgpoint communicates with the gNB|
+| AMF | `192.168.70.132` | Source of NG Setup Response frame 49; destination of Initial UE Message frame 110|
 | UPF | `192.168.70.134` | GTP-U tunnel engdpoint and forwards user plane traffics toward the data network|
-| Data Network | `192.168.70.135` | Destinatiton of the ICMP Echo Requests from the UE|
+| Data Network | `192.168.70.135` | Inner destination in frame 490; destination of decapsulated ICMP request frame 493|
 ### 5G Interfaces
 
 
 | Interface | Connected components | Main protocol | Purpose |
 |---|---|---|---|
-| N1 | UE and AMF |NAS-5GS| Carries NAS signal logically between the UE and AMF. The signal goes through the gNB|
+| N1 | UE and AMF |NAS-5GS| Registration, authentication, security, and session-management signaling|
 | N2 | gNB and AMF |NGAP| Carries controls plane signaling between the gNB and AMF. |
 | N3 | gNB and UPF |GTP-U| Caries user plane traffic between the gNB and UPF. |
 
