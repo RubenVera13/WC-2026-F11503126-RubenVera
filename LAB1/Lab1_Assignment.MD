@@ -18,7 +18,7 @@ OAI-5G-Wireshark-Profile.zip and oai-5g-combined.pcapng
 ## 3. Install the OAI-5G Wireshark Profile
 ![Install profiles](images/profiles.png)
 ## 4. Open and Verify the Capture
-
+a
 - The Protocol column shows NR RRC. And the Info column contains messages:
 - RRC Setup Request
 - RRC Setup
