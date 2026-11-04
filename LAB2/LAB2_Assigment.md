@@ -205,7 +205,7 @@ Complete the table for `pattern1`:
 
 | Item | DL-heavy: A/B | Balanced: C |
 | --- | --- | --- |
-| Configuration capture filename |  | |
+| Configuration capture filename | tdd-dl-heavy-sib1.pcapng | tdd-dl-balanced-sib1.pcapng |
 | SIB1 packet number | 2 | 2 |
 | `referenceSubcarrierSpacing` (kHz) | 30 | 30 |
 | `dl-UL-TransmissionPeriodicity` (ms) | 5 | 2.5 |
@@ -280,9 +280,9 @@ Use the supplied mapping between the reference configuration captures and scenar
 
 | Scenario | Reference TDD setting | JSON traffic direction | Configured UL symbol share (%) | Throughput (Mbps) | Packet loss (%) |
 | --- | --- | --- | ---: | ---: | ---: |
-| A | DL-heavy | | | | |
-| B | DL-heavy | | | | |
-| C | Balanced | | | | |
+| A | DL-heavy | downlink |  |  |  |
+| B | DL-heavy | uplink |  |  |  |
+| C | Balanced | uplink |  |  |  |
 
 Answer:
 
