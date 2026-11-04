@@ -63,7 +63,9 @@ Complete the table:
 
 **Question:** Does the traffic direction shown in the JSON match the scenario description? Show the proof.
 Yes
-
+![Proof A](images/ProofA.png)
+![Proof B](images/ProofB.png)
+![Proof C](images/ProofC.png)
 
 
 ## 4. Task 2 — Compare Throughput
