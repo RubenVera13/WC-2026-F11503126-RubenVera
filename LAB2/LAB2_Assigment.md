@@ -57,11 +57,14 @@ Complete the table:
 
 | Scenario | Reverse value | Direction |
 | --- | ---: | --- |
-| A | | |
-| B | | |
-| C | | |
+| A | 1 | downlink |
+| B | 0 | uplink |
+| C | 0 | uplink |
 
 **Question:** Does the traffic direction shown in the JSON match the scenario description? Show the proof.
+Yes
+
+
 
 ## 4. Task 2 — Compare Throughput
 
@@ -81,9 +84,9 @@ Complete the table:
 
 | Scenario | Direction | Throughput (Mbps) |
 | --- | --- | ---: |
-| A | Downlink | |
-| B | Uplink | |
-| C | Uplink | |
+| A | Downlink | 90.65 |
+| B | Uplink | 109.12 |
+| C | Uplink | 124.41 |
 
 Calculate how much C improves over B:
 
@@ -91,13 +94,16 @@ Calculate how much C improves over B:
 Improvement (%) = (C - B) ÷ B × 100
 ```
 
-Answer:
+Answer: 
 
 1. What is the downlink throughput in Scenario A?
-2. What is the uplink throughput in Scenario B?
-3. Is the uplink throughput higher in B or C?
-4. By approximately what percentage does C improve over B?
-
+   90654195.8358403 bits per second
+3. What is the uplink throughput in Scenario B?
+   109117249.69037457 bits per second
+5. Is the uplink throughput higher in B or C?
+   It is higher in C
+7. By approximately what percentage does C improve over B?
+   Aproximatelly by 12.3%
 > Use the JSON `bits_per_second` value. Do not recalculate throughput using the other time fields.
 
 ## 5. Task 3 — Check the Trade-off
