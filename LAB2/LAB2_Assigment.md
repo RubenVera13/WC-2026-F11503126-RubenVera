@@ -121,8 +121,8 @@ Complete the table:
 
 | Scenario | Throughput (Mbps) | Packet loss (%) | Jitter (ms) |
 | --- | ---: | ---: | ---: |
-| B | | | |
-| C | | | |
+| B | 109.12 | 0.23565878306653645 | 0.11619665995310689 |
+| C | 124.41 | 2.133919261135111 | 0.16204804777679407 |
 
 Answer:
 
@@ -130,11 +130,7 @@ Answer:
 2. Does C have lower packet loss than B?
 3. What trade-off, if any, is visible when changing from B to C?
 
-A simple answer format is:
-
-> Compared with Scenario B, Scenario C has ______ throughput, ______ packet loss, and ______ jitter. These results suggest ______.
-
-Use the measured values. If one result improves while another worsens, explain that trade-off. Do not assume that increasing UL resources always increases packet loss.
+Compared with Scenario B, Scenario C has higher throughput, higher packet loss, and more jitter. These results suggest a trade-off where increasing the uplink resources improves overall throughput, but negatively impacts quality metrics by slightly worsening packet loss and jitter..
 
 ## 6. Task 4 — Read SIB1 and Draw the TDD Configuration
 
