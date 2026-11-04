@@ -205,20 +205,19 @@ Complete the table for `pattern1`:
 
 | Item | DL-heavy: A/B | Balanced: C |
 | --- | --- | --- |
-| Configuration capture filename | | |
-| SIB1 packet number | | |
-| `referenceSubcarrierSpacing` (kHz) | | |
-| `dl-UL-TransmissionPeriodicity` (ms) | | |
-| `nrofDownlinkSlots` | | |
-| `nrofDownlinkSymbols` | | |
-| `nrofUplinkSlots` | | |
-| `nrofUplinkSymbols` | | |
-| Is `pattern2` present? | | |
-
-If `pattern2` is present, add another table containing its period and four slot/symbol counts. It uses the same reference SCS.
+| Configuration capture filename |  | |
+| SIB1 packet number | 2 | 2 |
+| `referenceSubcarrierSpacing` (kHz) | 30 | 30 |
+| `dl-UL-TransmissionPeriodicity` (ms) | 5 | 2.5 |
+| `nrofDownlinkSlots` | 7 | 2 |
+| `nrofDownlinkSymbols` | 6 | 6 |
+| `nrofUplinkSlots` | 2 | 2 |
+| `nrofUplinkSymbols` | 4 | 4 |
+| Is `pattern2` present? | NO | NO |
 
 Take **one screenshot per configuration** showing the selected SIB1 packet and the expanded TDD fields. Include `pattern2` in an additional screenshot if it is present and does not fit.
-
+![TDD heavy](Images/TDD_Configuration_Balanced.png)
+![TDD balanced](Images/TDD_Configuration_Heavy.png)
 ### 4.4 Draw the TDD Time Allocation
 
 Draw one diagram for DL-heavy and one for balanced. **Use the same 0–5 ms time axis for both diagrams.** Derive each repeating period from SIB1 and repeat the shorter pattern as needed to fill the 5 ms interval. Mark every repeating-period boundary.
