@@ -274,7 +274,7 @@ Next, count the symbols over the **same 5 ms interval** shown in your diagrams. 
 | Balanced | 2.5 | 2 | 68| 64 | 8 |
 
 **Question:** Can two patterns have the same UL symbol count per period but provide different numbers of UL symbols per unit time? Explain using your two tables.
-
+Yes, two patterns can have the same uplink (UL) symbol count per repeating period while providing a different number of UL symbols per unit time. This occurs when the patterns have different repeating period durations.Because the Balanced pattern repeats twice as frequently (every 2.5 ms instead of 5 ms), it delivers double the number of UL symbols per unit time (64 symbols vs. 32 symbols per 5 ms), resulting in a significantly higher uplink symbol share (45.7% vs. 22.9%).
 ### 4.5 Connect SIB1 to the Performance Results
 
 Use the supplied mapping between the reference configuration captures and scenarios. Complete this table using Tasks 1–3 and your SIB1 analysis:
@@ -288,38 +288,14 @@ Use the supplied mapping between the reference configuration captures and scenar
 Answer:
 
 1. Which decoded TDD parameters differ between DL-heavy and balanced?
+The decoded SIB1 TDD parameters (TDD-UL-DL-ConfigCommon) that differ between DL-heavy and Balanced are pattern1.dl-UL-TransmissionPeriodicity (5 ms in DL-heavy vs. 2.5 ms in Balanced) and pattern1.nrofDownlinkSlots (7 DL slots per 5 ms period in DL-heavy vs. 2 DL slots per 2.5 ms period in Balanced).
 2. Which configuration provides more configured UL symbols per unit time? Support your answer with the diagram and calculated share.
+Balanced provides significantly more configured UL symbols per unit time: while DL-heavy allocates 32 UL symbols per 5 ms period (a calculated UL symbol share of 22.9%), Balanced allocates 32 UL symbols per 2.5 ms period, repeating twice over that same 5 ms interval for a total of 64 UL symbols (a calculated UL symbol share of 45.7%).
 3. How does that difference help explain the B/C throughput comparison?
+This structural difference directly explains why Scenario C achieves higher uplink throughput (124.42 Mbps) than Scenario B (109.12 Mbps), as the Balanced configuration doubles the physical uplink transmission opportunities per unit time, granting the UE far more airtime resources to transmit data.
 4. Why can A and B use the same SIB1 TDD configuration even though their traffic directions differ?
+Scenarios A and B use the same SIB1 TDD configuration, because the TDD pattern is cell configuration broadcast, and it is by the gNB and the traffic direction is determined by the iperf3, therefore both can have the same configuration.
 
-> More configured UL resources can provide more opportunities for uplink traffic, but they do not guarantee a proportional throughput increase. Scheduling, radio conditions, overhead, offered traffic, and other radio settings also affect the result. This comparison does not establish that the TDD pattern is the only cause of a performance difference. SIB1 does not show actual slot-by-slot data scheduling. Because the configuration captures were recorded separately, use them as references for the supplied settings, not as independent proof of what was broadcast during each original performance run.
-
-### Optional Observation — PRACH Configuration Index
-
-In the same SIB1, find:
-
-```text
-servingCellConfigCommon
-  → uplinkConfigCommon
-    → initialUplinkBWP
-      → rach-ConfigCommon
-        → setup
-          → rach-ConfigGeneric
-            → prach-ConfigurationIndex
-```
-
-Wireshark may omit or display the `setup` layer differently. You can also use this display filter, then confirm the field is inside SIB1:
-
-```text
-nr-rrc.prach_ConfigurationIndex
-```
-
-| TDD setting | SIB1 packet number | PRACH configuration index |
-| --- | ---: | ---: |
-| DL-heavy | | |
-| Balanced | | |
-
-PRACH is used to send a random-access preamble. Its configuration index is not the DL/UL slot ratio and does not directly explain iperf3 throughput. Equal indices in the two configurations are a valid observation. Drawing PRACH occasions requires additional parameters and the applicable TS 38.211 table; it is outside the required TDD drawing task.
 
 ## 7. Task 5 — Is the TDD Setting Suitable?
 
