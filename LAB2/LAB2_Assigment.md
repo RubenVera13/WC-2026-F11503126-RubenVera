@@ -422,7 +422,8 @@ Record the scenario, display filter, packet numbers, and time interval.
 | Scenario | Display filter | Packet numbers | Time interval |
 | --- | --- | --- | --- |
 | A | udp && ip.src == 192.168.70.135 && ip.dst == 10.0.0.6 | 1892 → 1896 | 1.045 ms |
-The packet interval: Time delta from previous displayed frame, between the two consecutive data packets is 1.045 ms.
+
+
 ![Displayed_A](Images/Displayed_A2.png)
 
 ## 11. Final Questions
