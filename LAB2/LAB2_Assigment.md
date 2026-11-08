@@ -303,9 +303,9 @@ Complete the table using the supplied scenario mapping, the SIB1 reference confi
 
 | Scenario | TDD setting | Traffic direction | Is the setting suitable for this direction? Why? |
 | --- | --- | --- | --- |
-| A | DL-heavy | Downlink | |
-| B | DL-heavy | Uplink | |
-| C | Balanced | Uplink | |
+| A | DL-heavy | Downlink | Yes. It is suitable because the DL-heavy setting allocates the majority of resources/symbols to the downlink, providing more transmission opportunities for heavy downlink traffic and achieving high throughput. |
+| B | DL-heavy | Uplink | No. It is not suitable for heavy uplink traffic because the DL-heavy setting reserves very few resources (only 22.9% UL symbol share) for the uplink, limiting transmission opportunities and bottlenecking throughput compared to other settings. |
+| C | Balanced | Uplink | Yes. It is more suitable for uplink traffic than the DL-heavy setting because it provides more transmission opportunities for the uplink (doubling the UL symbol share to 45.7% per unit time), resulting in higher uplink throughput. |
 
 Use these ideas:
 
@@ -318,7 +318,7 @@ Use these ideas:
 > The configuration captures show the reference broadcast TDD settings. The iperf3 JSON reports performance; it does not contain TDD parameters. The scenario captures are used for traffic analysis and need not include SIB1.
 
 **Question:** Why might Scenario C achieve better uplink throughput than Scenario B? Refer to your SIB1 diagrams and measured results.
-
+Scenario C achieves higher uplink throughput than Scenario B because it uses a Balanced TDD configuration, which has a shorter transmission periodicity (2.5 ms vs. 5 ms) and allocates more UL symbols per unit time. This doubles the configured uplink resource share (45.7% in C vs. 22.9% in B), granting the UE twice as many physical transmission opportunities over the air and allowing throughput to increase from 109.12 Mbps (Scenario B) to 124.42 Mbps (Scenario C).
 ## 8. Task 6 — Find GTP-U Information
 
 Open a **scenario capture** in Wireshark and enter this display filter:
