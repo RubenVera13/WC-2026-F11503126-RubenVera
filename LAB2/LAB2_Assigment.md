@@ -259,8 +259,8 @@ Configured UL symbol share (%) = Configured UL symbols ÷ Total symbols × 100
 ```
 
 For two patterns, sum the counts and durations of both patterns before calculating the share. These are symbol-count shares of the common configuration, not exact airtime measurements or measured throughput shares.
-![TDD heavy](Images/Balanced_TDD.png)
-![TDD balanced](Images/Heavy_TDD.png)
+![TDD heavy](Images/Balanced_TDD.jpg)
+![TDD balanced](Images/Heavy_TDD.jpg)
 | TDD setting | Repeating duration (ms) | Total reference slots | DL symbols | UL symbols | Flexible symbols | Configured UL symbol share (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | DL-heavy | 5 | 10 | 104 | 32 | 4| 22.9% |
