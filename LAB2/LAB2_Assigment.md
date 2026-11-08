@@ -430,53 +430,19 @@ The packet interval: Time delta from previous displayed frame, between the two c
 Answer each question in two or three sentences:
 
 1. Does Scenario A use a TDD setting that matches its traffic direction?
+   Yes, Scenario A uses a DL-heavy TDD configuration while running downlink traffic. This is a direct match because allocating the majority of radio resources to the downlink direction provides maximum transmission opportunities for downlink data transfers.
 2. Why is Scenario B expected to have limited uplink resources? Cite a parameter or count from the DL-heavy SIB1 reference configuration.
+   Scenario B experiences limited uplink resources because it uses the DL-heavy setting while attempting to send uplink traffic. Specifically, the configuration allocates only 2 uplink slots out of 10 total slots (nrofUplinkSlots = 2) per 5 ms period, yielding an uplink symbol share of only 22.9%.
 3. How much does uplink throughput change from B to C?
+ Uplink throughput increases from 109.12 Mbps in Scenario B to 124.41 Mbps (or 124.42 Mbps) in Scenario C. This represents an absolute gain of roughly 15.29 Mbps, or an approximate relative improvement of 12.3%.
 4. What negative result, if any, is visible in C? Support your answer with packet loss or jitter values.
+   Scenario C shows a noticeable degradation in transmission quality metrics compared to Scenario B. Specifically, packet loss increases from 0.235% in B to 2.133% in C, and jitter rises from 0.116 ms to 0.162 ms.
 5. Why can increasing UL resources improve uplink throughput?
+   Increasing UL resources provides the user equipment (UE) with more physical time/frequency transmission opportunities per unit time over the air. With higher uplink symbol availability, the device can transmit queued buffer data more frequently and reduce waiting delays, leading to higher overall throughput.   
 6. Is adding more UL resources always the best solution? Explain using throughput and packet loss.
-7. Suggest one simple follow-up test that could improve throughput without producing too much packet loss.
+   No, allocating more UL resources is not always the best solution because network performance is a trade-off between speed and reliability. As seen in Scenario C, while throughput improved by ~12.3%, packet loss increased nearly ninefold (from 0.235% to 2.133%), showing that pushing more uplink resources under heavy traffic can induce congestion or buffer overflows.
+7. Suggest one simple follow-up test that could improve throughput without producing too much packet loss
+   A simple follow-up test would be to slightly lower the target sending rate in iperf3 (e.g., using the -b bandwidth limit option) while keeping the Balanced TDD configuration. Alternatively, testing a slightly lower modulation and coding scheme (MCS) or adjusting the flexible symbol allocation could help optimize throughput without overloading the uplink queue and causing high packet loss.
 8. What can the configuration captures tell you that the iperf3 JSON cannot? Why are separately recorded configuration captures not direct proof of the configuration during an earlier test?
+   Configuration captures reveal lower-layer 3GPP RRC/MAC parameters, such as SIB1 common TDD patterns, slot counts, subcarrier spacing, and periodicity, which are completely absent in the application-layer iperf3 JSON report. Separately recorded configuration captures are not direct proof of an earlier test because they were recorded independently at cell setup rather than simultaneously during the iperf3 data stream execution.
 
-## 12. Submission Checklist
-
-Submit one Markdown file containing:
-
-- the completed direction table;
-- the throughput table and B-to-C calculation;
-- the B/C packet-loss and jitter table;
-- the SIB1 TDD parameter table, including filenames and packet numbers;
-- one SIB1 TDD screenshot per configuration, plus `pattern2` screenshots if needed;
-- two TDD diagrams: DL-heavy and balanced, with D/U/F labels and mixed-slot symbol details;
-- the per-sequence symbol-count / UL-share table, the common 5 ms comparison table, and the configuration-to-performance table;
-- the Task 4.5 answers and the TDD suitability table;
-- one GTP-U screenshot and its completed table;
-- the TCP retransmission counts and screenshots;
-- one TCP ACK RTT example;
-- one packet-interval example; and
-- answers to the final questions.
-
-The PRACH observation is optional and carries no required points. Include all referenced image files alongside the Markdown file, or submit a ZIP containing the report and images.
-
-## 13. Grading Rubric
-
-| Item | Points |
-| --- | ---: |
-| Traffic direction | 5 |
-| Throughput values and calculation | 20 |
-| B/C packet-loss and jitter comparison | 15 |
-| SIB1 TDD parameter extraction and screenshot evidence | 10 |
-| TDD diagrams, symbol counts, and UL shares | 10 |
-| TDD suitability and connection to measured performance | 10 |
-| GTP-U fields and screenshot | 15 |
-| TCP retransmission, RTT, and packet interval | 10 |
-| Clear final answers | 5 |
-| **Total** | **100** |
-
-## References
-
-These references support the field names and interpretation. Reading the full specifications is not required.
-
-- [Wireshark NR RRC display filter reference](https://www.wireshark.org/docs/dfref/n/nr-rrc.html): SIB1 and TDD display-filter fields.
-- [3GPP TS 38.331, Release 18](https://www.etsi.org/deliver/etsi_ts/138300_138399/138331/18.08.00_60/ts_138331v180800p.pdf): SIB1, TDD-UL-DL-ConfigCommon, and TDD-UL-DL-Pattern definitions.
-- [3GPP TS 38.213, Release 17, Section 11.1](https://www.etsi.org/deliver/etsi_ts/138200_138299/138213/17.06.00_60/ts_138213v170600p.pdf): Interpretation of common TDD slot and symbol allocation.
