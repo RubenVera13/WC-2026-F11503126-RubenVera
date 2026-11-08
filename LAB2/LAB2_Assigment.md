@@ -259,18 +259,19 @@ Configured UL symbol share (%) = Configured UL symbols ÷ Total symbols × 100
 ```
 
 For two patterns, sum the counts and durations of both patterns before calculating the share. These are symbol-count shares of the common configuration, not exact airtime measurements or measured throughput shares.
-
+![TDD heavy](Images/Balanced_TDD.png)
+![TDD balanced](Images/Heavy_TDD.png)
 | TDD setting | Repeating duration (ms) | Total reference slots | DL symbols | UL symbols | Flexible symbols | Configured UL symbol share (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| DL-heavy | | | | | | |
-| Balanced | | | | | | |
+| DL-heavy | 5 | 10 | 104 | 32 | 4| 22.9% |
+| Balanced | 2.5 | 5 | 34 | 32 | 4 | 45.7% |
 
 Next, count the symbols over the **same 5 ms interval** shown in your diagrams. Multiply each per-sequence count by the number of complete repetitions in 5 ms. For these captures, 5 ms contains a whole number of repetitions for both configurations.
 
 | TDD setting | Repeating duration (ms) | Repetitions in 5 ms | DL symbols in 5 ms | UL symbols in 5 ms | Flexible symbols in 5 ms |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| DL-heavy | | | | | |
-| Balanced | | | | | |
+| DL-heavy | 5 | 1 | 104 | 32 | 4 |
+| Balanced | 2.5 | 2 | 68| 64 | 8 |
 
 **Question:** Can two patterns have the same UL symbol count per period but provide different numbers of UL symbols per unit time? Explain using your two tables.
 
@@ -280,9 +281,9 @@ Use the supplied mapping between the reference configuration captures and scenar
 
 | Scenario | Reference TDD setting | JSON traffic direction | Configured UL symbol share (%) | Throughput (Mbps) | Packet loss (%) |
 | --- | --- | --- | ---: | ---: | ---: |
-| A | DL-heavy | downlink |  |  |  |
-| B | DL-heavy | uplink |  |  |  |
-| C | Balanced | uplink |  |  |  |
+| A | DL-heavy | downlink | 22.9% | 90.65 | 0.44% |
+| B | DL-heavy | uplink | 22.9% | 109.12 | 0.24% |
+| C | Balanced | uplink | 45.7% |  124.42| 2.13% |
 
 Answer:
 
