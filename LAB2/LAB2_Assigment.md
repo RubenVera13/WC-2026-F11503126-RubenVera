@@ -353,7 +353,7 @@ Meaning:
 - **TEID:** Identifies the GTP-U tunnel at the receiving endpoint.
 
 Take one screenshot showing the selected packet and these fields.
-![Screenshot1](Images/TDD_Screenshot_1.png)
+![Screenshot1](Images/Screenshot_1.png)
 ![Screenshot2](Images/Screenshot_2.png)
 > Some GTP packets are echo or control-related packets. Select one that contains an inner IPv4 packet.
 
@@ -373,14 +373,17 @@ Record the number of displayed packets:
 
 | Scenario | Displayed TCP retransmissions |
 | --- | ---: |
-| A | |
-| B | |
-| C | |
+| A | 14 |
+| B | 12 |
+| C | 12 |
 
 > Report the number displayed by Wireshark using the specified filter. Counts may vary with Wireshark analysis settings. Include screenshots showing the filter and displayed count for each scenario. The filter includes any TCP flows that Wireshark can decode in the capture; a displayed retransmission is not, by itself, proof of loss in the UDP test.
 
 **Question:** Do these TCP retransmissions directly represent lost UDP performance packets?
-
+No, they do not, because the performance traffic in this lab is UDP, so these TCP retransmissions do not directly represent lost UDP performance packets.
+![DisplayedTCP_A](Images/DisplayedTCP_A.png)
+![DisplayedTCP_B](Images/DisplayedTCP_B.png)
+![DisplayedTCP_C](Images/DisplayedTCP_C.png)
 ## 10. Task 8 — RTT and Packet Interval
 
 Use a **scenario capture** for both parts of this task.
@@ -397,8 +400,9 @@ Select one packet from the iperf3 TCP control connection and record its ACK RTT:
 
 | Scenario | Packet number | Example TCP ACK RTT |
 | --- | ---: | --- |
-| A, B, or C | | |
+| A| 18.48 | 219 ms|
 
+![Displayed_A](Images/Displayed_A.png)
 This value is the RTT of the TCP control connection. It is not the RTT of the UDP data packets.
 
 ### Packet Interval
@@ -417,9 +421,9 @@ Record the scenario, display filter, packet numbers, and time interval.
 
 | Scenario | Display filter | Packet numbers | Time interval |
 | --- | --- | --- | --- |
-| | | | |
-
-**Note:** The time interval depends on the applied display filter. Make sure the selected packets are distinct data packets, not duplicated observations from different capture points. Do not use their interval to infer the TDD slot pattern.
+| A | udp && ip.src == 192.168.70.135 && ip.dst == 10.0.0.6 | 1892 → 1896 | 1.045 ms |
+The packet interval: Time delta from previous displayed frame, between the two consecutive data packets is 1.045 ms.
+![Displayed_A](Images/Displayed_A2.png)
 
 ## 11. Final Questions
 
