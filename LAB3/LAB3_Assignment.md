@@ -63,12 +63,22 @@ Observe their terminal outputs and locate evidence of the following stages.
 | UE tunnel creation | Yes | `oaitun_ue1` interface was created with IP address `10.0.0.2` |
 
 Take screenshots showing the gNB and UE successfully connected.
-
+![GNB_Connected](Images/GNB_Connected.png)
+![GNB_Connected](Images/UE_Connected.png)
 **Questions:**
 
 1. Does a successful NG Setup guarantee that a UE can register? Explain.
-2. Why can the UE establish an RRC connection but still fail Registration?
-3. What additional procedure is required after Registration before user data can be exchanged?
+
+   No.A successful NG Setup only establishes the control-plane connection (N2 interface over SCTP/NGAP) between the gNB (RAN) and the AMF (5G Core), verifying that they share compatible configurations (such as PLMNs and Tracking Area Codes). It does not guarantee UE registration because registration is a separate, UE-specific Non-Access Stratum (NAS) procedure that depends on the UE successfully synchronizing over the radio interface, establishing an RRC connection, and passing core network authentication and subscription checks
+   
+3. Why can the UE establish an RRC connection but still fail Registration?
+
+   RRC connection establishment is strictly an Access Stratum (AS) procedure between the UE and the gNB over the air interface (Uu) to set up signaling radio bearers. Once the RRC connection is up, the UE encapsulates a Non-Access Stratum (NAS) Registration Request inside an RRC message, which the gNB forwards to the AMF. Registration can still fail at the core network level due to authentication failures, Unknown or unprovisioned subscriber or policy or Slice rejections.
+   
+5. What additional procedure is required after Registration before user data can be exchanged?
+
+ PDU Session Establishment is required. While Registration authenticates the UE and attaches it to the 5G Core control plane (AMF), it does not allocate an IP address or create a user-plane data path. During PDU Session Establishment, the Session Management Function (SMF) and User Plane Function (UPF) allocate an IP address to the UE and set up the GTP-U tunnels (N3 interface between gNB and UPF) and Data Radio Bearers (DRBs) needed to route user-plane traffic to the external Data Network (DN).
+   
 
 ## 4. Task 2 — Investigate RFsimulator Communication
 
