@@ -1,7 +1,6 @@
 # Lab 3: Deploying a 5G Standalone Network Using OpenAirInterface
 
 ## 1. Goal
-https://hackmd.io/sR7IipLOSCi1pb2hGoHZJg
 In the previous labs, you analyzed 5G signaling messages and network performance using provided captures and measurements.
 
 In this lab, you will deploy your own 5G Standalone (SA) network using OpenAirInterface (OAI), verify the complete connection, investigate RFsimulator communication, perform active network measurements, and troubleshoot a controlled connection failure.
@@ -55,13 +54,13 @@ Observe their terminal outputs and locate evidence of the following stages.
 
 | Stage | Successful? | Evidence from logs |
 |---|---|---|
-| CN5G initialization | | |
-| gNB NG Setup | | |
-| UE synchronization | | |
-| RRC connection establishment | | |
-| UE Registration | | |
-| PDU Session Establishment | | |
-| UE tunnel creation | | |
+| CN5G initialization | Yes | show `healthy` |
+| gNB NG Setup | Yes | gNB logs indicated successful SCTP connection and NG Setup with AMF |
+| UE synchronization | Yes | `UE synchronized!` |
+| RRC connection establishment | Yes | UE logs showed continuous data transmission (MAC TX/RX statistics) |
+| UE Registration | Yes | Successful data flow and tunnel creation implied successful registration |
+| PDU Session Establishment | Yes | `PDU Session Establishment Accept, UE IPv4: 10.0.0.2`|
+| UE tunnel creation | Yes | `oaitun_ue1` interface was created with IP address `10.0.0.2` |
 
 Take screenshots showing the gNB and UE successfully connected.
 
