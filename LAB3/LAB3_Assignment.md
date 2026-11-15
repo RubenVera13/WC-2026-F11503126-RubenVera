@@ -169,7 +169,8 @@ Take a screenshot of the Ping result.
 
    No. Registration is strictly a control-plane procedure with the AMF that authenticates the UE and attaches it to the network, without allocating an IP address or setting up data paths. User-plane connectivity requires a separate PDU Session Establishment procedure to succeed—where the SMF allocates the UE IP address (10.0.0.2), configures the UPF routing rules/NAT, and establishes both the Data Radio Bearers (DRBs) over the air and the N3 GTP-U tunnel between the gNB and UPF. If PDU Session Establishment, IP routing, or UPF forwarding fails, user-plane traffic will fail even though the UE is registered.
 3. What does a successful Ping prove, and what does it not prove about the simulated 5G system?
-   What it proves: It verifies end-to-end bidirectional IP connectivity across the full 5G stack—confirming that RRC connection, NAS Registration, PDU Session Establishment, IP address allocation (10.0.0.2), baseband signal processing over RFsimulator, gNB-to-UPF GTP-U encapsulation, and External DN routing are all functioning properly for basic control and low-rate data traffic.
+
+    What it proves: It verifies end-to-end bidirectional IP connectivity across the full 5G stack—confirming that RRC connection, NAS Registration, PDU Session Establishment, IP address allocation (10.0.0.2), baseband signal processing over RFsimulator, gNB-to-UPF GTP-U encapsulation, and External DN routing are all functioning properly for basic control and low-rate data traffic.
 
 What it does not prove: It does not prove real-world RF performance (such as resilience to multipath fading, interference, path loss, or Doppler shift, since RFsimulator uses a lossless TCP channel), high-throughput capacity, strict QoS/low-latency guarantees under heavy load, multi-UE scheduling fairness, or mobility/handover stability across multiple gNBs.
    
@@ -199,29 +200,42 @@ ping -I oaitun_ue1 -s 1200 -c 30 -i 0.2 192.168.70.135
 ```
 
 Note: `-s` specifies ICMP payload size, not the complete IP packet size.
-
+![Scenario_A](Images/Scenario_A.png)
+![Scenario_B](Images/Scenario_B.png)
+![Scenario_C](Images/Scenario_C.png)
 Complete the table:
 
 | Scenario | ICMP Payload | Avg. RTT (ms) | Max. RTT (ms) | Packet Loss (%) |
-|---|---:|---:|---:|---:|
-| A | 56 bytes | | | |
-| B | 512 bytes | | | |
-| C | 1200 bytes | | | |
-
+| -------- | -----------: | ------------: | ------------: | --------------: |
+| A        |     56 bytes |        22.018 |        27.833 |              0% |
+| B | 512 bytes | 19.771 | 23.802 | 0% |
+| C | 1200 bytes | 22.832 | 26.748 | 0% |
 Calculate the RTT difference:
 
 ```text
-RTT Difference = Average RTT(C) - Average RTT(A)
+*RTT Difference = Average RTT(C) - Average RTT(A) = 26.748 - 22.018 = **4.730 ms***
 ```
 
 **Questions:**
 
 1. Which scenario has the highest average RTT?
+   Scenario C (1200 bytes) had the highest average RTT (**22.832 ms**).
 2. Does increasing packet size always increase RTT in your measurements?
+   Yes
 3. Why might a larger packet require more transmission or processing resources?
+    Becasue larger packets contains more data and needs more resources to process and transport. They require more schedulings, encoding, decoding and memory.
 4. What factors other than packet size could affect RTT in a software-based 5G network?
-5. Can these results be interpreted as real over-the-air 5G latency? Explain.
+   
+   5G NR Frame Structure & Scheduling: Subcarrier spacing (e.g., 15 kHz vs. 30 kHz, which determines slot duration: 1 ms vs. 0.5 ms), TDD downlink/uplink slot patterns (waiting for an uplink slot to send the ICMP echo request or reply), and Scheduling Request (SR) / Buffer Status Report (BSR) periodicity.
 
+Host CPU Load & Thread Scheduling: OAI nr-softmodem and nr-uesoftmodem are real-time, CPU-intensive DSP applications. Host background processes, CPU frequency scaling, core pinning, or virtualization overhead directly delay slot processing.
+
+RFsimulator TCP Buffering: Socket buffer sizes, Nagle's algorithm/TCP delays, and inter-process communication overhead between the UE and gNB processes.
+
+Core Network & Routing Overhead: Packet traversal through the TUN interface (oaitun_ue1), GTP-U encapsulation/decapsulation at the gNB and UPF, and Docker bridge routing delays.
+
+5. Can these results be interpreted as real over-the-air 5G latency? Explain.
+No. While the testbed accurately executes the 5G NR protocol stack (RRC, SDAP, PDCP, RLC, MAC, and baseband PHY) and reflects realistic protocol-level scheduling delays (such as TDD slot alignment and SR/BSR handshakes), the measured RTT does not represent commercial over-the-air 5G latency.
 Do not assume that RTT must increase with packet size. Use your measured values to support your explanation.
 
 ## 7. Task 5 — Diagnose a Controlled UE Registration Failure
