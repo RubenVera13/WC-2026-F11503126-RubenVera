@@ -64,7 +64,7 @@ Observe their terminal outputs and locate evidence of the following stages.
 
 Take screenshots showing the gNB and UE successfully connected.
 ![GNB_Connected](Images/GNB_Connected.png)
-![GNB_Connected](Images/UE_Connected.png)
+![UE_Connected](Images/UE_Connected.png)
 **Questions:**
 
 1. Does a successful NG Setup guarantee that a UE can register? Explain.
@@ -111,21 +111,26 @@ Complete the table:
 
 | Item | Observed Value |
 |---|---|
-| gNB process ID | |
-| nrUE process ID | |
-| RFsimulator transport protocol | |
-| RFsimulator port | |
-| TCP connection state | |
-| Connected process(es) | |
+| gNB process ID | **91505** (and 91506) |
+| nrUE process ID | **96325** (and 96326) |
+| RFsimulator transport protocol | **TCP** |
+| RFsimulator port | **4043** |
+| TCP connection state | **ESTAB** |
+| Connected process(es) | `nr-softmodem` and `nr-uesoftmodem` |
 
 Take one screenshot showing the TCP connection.
-
+![TCP_Connection](Images/TCP_Connection.png)
 **Questions:**
 
 1. Why does RFsimulator use a TCP connection instead of a physical antenna?
+   
+   RFsimulator replaces expensive, specialized radio hardware (such as USRPs, antennas, RF cables, and attenuators) with a software-defined virtual radio channel. Using a TCP socket allows the gNB (nr-softmodem) and nrUE (nr-uesoftmodem) to run on a single host machine or across containers without over-the-air transmissions, avoiding spectrum licensing issues, hardware setup complexity, and physical interference while ensuring reliable, lossless delivery of baseband signals during testing.
 2. Are the TCP packets exchanged by RFsimulator the same as the UE's application-layer IP packets?
-3. Does using RFsimulator mean that the UE and gNB are performing no physical-layer processing? Explain.
 
+   No. The TCP packets on port 4043 carry raw baseband IQ (In-phase and Quadrature) time-domain samples representing the simulated radio waveform, not the UE's user-plane IP traffic. While the UE's application-layer IP packets (such as ICMP pings sent over oaitun_ue1) are encapsulated within that transmission, they pass down through the entire 5G protocol stack (SDAP, PDCP, RLC, MAC, and PHY) where they are encrypted, segmented, channel-coded, modulated, and converted into baseband IQ samples before being sent over the RFsimulator TCP link.
+3. Does using RFsimulator mean that the UE and gNB are performing no physical-layer processing? Explain.
+   
+   No. Both the UE and gNB still execute the full 5G NR Physical Layer (Layer 1) signal processing chain in software. This includes CRC attachment, LDPC/Polar channel coding, scrambling, QAM modulation, MIMO layer mapping, resource grid mapping, and OFDM modulation/demodulation (IFFT/FFT). RFsimulator only bypasses the RF front-end (digital-to-analog/analog-to-digital conversion, frequency upconversion/downconversion, and physical antenna radiation), passing the resulting digital baseband IQ samples directly between the two PHY layers over TCP.
 ## 5. Task 3 — Verify End-to-End Connectivity
 
 Check the UE tunnel interface:
