@@ -1,7 +1,7 @@
 # Lab 3: Deploying a 5G Standalone Network Using OpenAirInterface
 
 ## 1. Goal
-
+https://hackmd.io/sR7IipLOSCi1pb2hGoHZJg
 In the previous labs, you analyzed 5G signaling messages and network performance using provided captures and measurements.
 
 In this lab, you will deploy your own 5G Standalone (SA) network using OpenAirInterface (OAI), verify the complete connection, investigate RFsimulator communication, perform active network measurements, and troubleshoot a controlled connection failure.
