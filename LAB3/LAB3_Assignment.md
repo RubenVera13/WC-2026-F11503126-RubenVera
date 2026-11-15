@@ -210,6 +210,7 @@ Complete the table:
 | A        |     56 bytes |        22.018 |        27.833 |              0% |
 | B | 512 bytes | 19.771 | 23.802 | 0% |
 | C | 1200 bytes | 22.832 | 26.748 | 0% |
+
 Calculate the RTT difference:
 
 ```text
@@ -273,17 +274,17 @@ docker compose logs --since=2m oai-amf
 ```
 
 Allow time for registration attempts, then stop the UE.
-
+![Registration_Failure](Registration_Failure.png)
 Complete the table:
 
 | Item | Observation |
 |---|---|
-| Modified parameter | |
-| UE synchronized with gNB? | |
-| RRC connection established? | |
-| Registration successful? | |
-| Error or rejection evidence | |
-| Likely cause | |
+| Modified parameter | Changed `--uicc0.imsi` to `001010000000099` |
+| UE synchronized with gNB? | Yes |
+| RRC connection established? | Yes |
+| Registration successful? | No |
+| Error or rejection evidence | AMF logs showed the UE status as `5GMM-DEREGISTERED` for IMSI `001010000000099`. |
+| Likely cause | Authentication failure because IMSI `099` is not provisioned in the core network's subscriber database (UDR/MySQL). |
 
 If the expected registration rejection does not appear, report the actual logs instead of inventing a failure message.
 
@@ -299,10 +300,14 @@ Confirm that the UE successfully registers again and that Ping works.
 
 **Questions:**
 
-1. Why can the UE potentially synchronize with the gNB even when the IMSI is incorrect?
-2. Which network function is involved in UE authentication?
-3. Why does changing an IMSI affect Registration but not the RFsimulator TCP connection itself?
-4. What evidence proves that restoring the correct configuration solved the problem?
+1.  **Why can the UE potentially synchronize with the gNB even when the IMSI is incorrect?**
+    Synchronization (detecting SSB signals) is a purely physical-layer process that does not require any identity verification. It happens before any signaling messages are exchanged.
+2.  **Which network function is involved in UE authentication?**
+    The **AUSF** (Authentication Server Function) and the **UDM** (Unified Data Management), which cross-references the IMSI and secret keys stored in the UDR/MySQL database.
+3.  **Why does changing an IMSI affect Registration but not the RFsimulator TCP connection itself?**
+    The RFsimulator TCP connection only transports raw IQ samples representing the physical RF channel between the UE and gNB. The IMSI is an application-layer (NAS) identity evaluated much higher up in the protocol stack at the Core Network, so it has no bearing on the underlying physical simulation link.
+4.  **What evidence proves that restoring the correct configuration solved the problem?**
+    After restoring the IMSI to `001010000000001`, the AMF logged successful registration, the `oaitun_ue1` interface received an IP address again, and ICMP Ping packets to `192.168.70.135` were successfully transmitted and received.
 
 Submit evidence from both the failed and recovered connections.
 
@@ -315,30 +320,57 @@ Complete the comparison:
 
 | Feature | OAI RFsimulator | Physical 5G System |
 |---|---|---|
-| gNB and UE protocol stack | | |
-| OFDM signal processing | | |
-| Physical antennas | | |
-| RF hardware impairments | | |
-| Wireless propagation effects | | |
-| 5G Core connectivity | | |
-
+| gNB and UE protocol stack | Yes | Yes |
+| OFDM signal processing | Yes | Yes |
+| Physical antennas | No | Yes |
+| RF hardware impairments | Absent | Present |
+| Wireless propagation effects | Absent | Present (path loss, fading, interference, noise) |
+| 5G Core connectivity | Present | Present |
 **Questions:**
 
 1. Which parts of the 5G system remain functional when physical RF hardware is replaced with RFsimulator?
+   
+   Virtually the entire 5G architecture remains active and functional, except for the physical RF front-end (DAC/ADC, frequency up/down-conversion, power amplifiers, and antennas
 2. Why is RFsimulator useful for testing the 5G protocol stack?
+
+   Hardware-Free & Cost-Effective: Eliminates the need for expensive Software-Defined Radios (USRPs), antennas, RF shielding boxes, and spectrum licenses, allowing developers and researchers to run full end-to-end 5G networks on a single laptop or server.
+
+Deterministic & Repeatable Debugging: Because baseband IQ samples are exchanged over a reliable TCP socket without random over-the-air interference or hardware calibration drift, protocol bugs (in RRC state machines, NAS signaling, MAC scheduling, or GTP-U tunneling) can be reliably reproduced and isolated.
+
+CI/CD & Rapid Prototyping: Enables automated regression testing, multi-container deployments, and rapid software modifications to OAI RAN/Core code without physical lab setup overhead.
 3. Why might latency and throughput differ between RFsimulator and a real 5G deployment?
+
+   Channel Idealization vs. Real RF Impairments: RFsimulator uses a lossless TCP connection with near-zero propagation delay, no path loss, no multipath fading, and no interference—avoiding physical-layer packet errors, HARQ retransmissions, and MCS (Modulation and Coding Scheme) drops that degrade real-world performance.
+
+General-Purpose CPU vs. Dedicated Hardware Accelerators: In RFsimulator, computationally heavy baseband DSP tasks (LDPC decoding, FFTs) run on general-purpose x86 CPUs alongside Linux OS scheduling and TCP socket buffering. Commercial gNBs and UEs use specialized ASICs/FPGAs/DSPs, achieving much lower processing latency and much higher sustained bandwidth (e.g., 100 MHz channels with 4x4 MIMO) than a software-only host can typically sustain in real time.
+
+Clock Synchronization: Real deployments rely on precision hardware clocks (GPS/1588 PTP) and strict over-the-air timing advance, whereas RFsimulator self-paces its sample exchange over TCP, meaning simulation speed can either outpace or lag behind wall-clock real time depending on CPU load.
 4. What would need to change if you wanted to test a physical UE instead of OAI nrUE?
+
+   Physical RF Front-End Hardware: Replace RFsimulator on the gNB with a supported Software-Defined Radio (e.g., Ettus USRP B210, N310, or X310) equipped with compatible antennas, RF cables, and attenuators (or an RF shield box) to radiate real over-the-air 5G NR signals.
+
+Precision Clocking & RF Calibration: Provide a stable external 10 MHz reference clock / GPSDO (especially for TDD synchronization) and configure transmit/receive gains and frequencies (nr-softmodem command-line flags and .conf files) to match a legal/licensed test band supported by the physical UE.
+
+Programmable SIM Card & Core Provisioning: Burn a physical programmable USIM card (using tools like pySim) with the exact IMSI/SUPI, cryptographic keys (K, OPc), and PLMN ID configured in the 5G Core's UDM/MySQL subscriber database, and insert it into the commercial/test handset (which must also be configured to allow the test PLMN and SA 5G mode).
 
 ## 9. Final Analysis
 
 Answer each question in three to five sentences.
 
 1. Describe the complete process from starting the OAI 5GC to successful user-plane connectivity.
-2. Explain the difference between an RFsimulator TCP connection and a 5G PDU Session.
-3. Based on your measurements, how did packet size affect RTT and packet loss?
-4. Describe the registration failure you introduced and explain how you diagnosed and recovered from it.
-5. Identify two limitations of this simulated environment and explain how they might affect experimental results.
 
+   First, the OAI 5G Core Network functions (such as NRF, UDM, AUSF, AMF, SMF, and UPF) are initialized so that internal control-plane services and subscriber databases are ready. Next, the gNB (nr-softmodem) starts and establishes an SCTP/NGAP control-plane connection with the AMF via the NG Setup procedure, while opening the RFsimulator server socket. The nrUE (nr-uesoftmodem) then connects to the gNB over RFsimulator, completes Physical Layer synchronization and RRC connection setup, and exchanges NAS signaling with the AMF to authenticate and register on the network. Finally, the UE initiates a PDU Session Establishment request, prompting the SMF and UPF to allocate an IP address (10.0.0.2), configure the oaitun_ue1 virtual interface, and establish the Data Radio Bearers and N3 GTP-U tunnel required to route end-to-end user-plane traffic.
+2. Explain the difference between an RFsimulator TCP connection and a 5G PDU Session.
+An RFsimulator TCP connection is a testbed-level transport link (typically on port 4043) that substitutes for physical antennas and RF front-ends by carrying raw baseband IQ time-domain waveform samples directly between the gNB and nrUE PHY layers. In contrast, a 5G PDU Session is a standard 3GPP logical user-plane connection established between the UE and the Data Network via the gNB and UPF, complete with an assigned UE IP address and Quality of Service (QoS) flows. Essentially, the RFsimulator TCP socket acts as the virtual wireless medium at the bottom of the stack, whereas the PDU Session operates at the network layer on top of the 5G protocol stack to carry actual user application IP packets.
+   
+3. Based on your measurements, how did packet size affect RTT and packet loss?
+
+   Increasing the ICMP packet payload size generally produces a slight upward trend in average Round-Trip Time (RTT) because larger packets require more Physical Resource Blocks, higher baseband processing/coding overhead, and occasionally RLC/MAC segmentation across multiple 5G NR slots. However, small-to-moderate increases in packet size often show minimal RTT difference when both sizes fit within the same scheduled MAC Transport Block, and host CPU scheduling jitter can introduce minor fluctuations. Across all tested packet sizes, packet loss typically remains at 0% because RFsimulator uses a reliable, lossless TCP socket rather than a noisy over-the-air radio channel.
+4. Describe the registration failure you introduced and explain how you diagnosed and recovered from it.
+  I introduced a failure by modifying the UE's IMSI to `...099`, an identity not provisioned in the core network's database. I diagnosed this by observing the AMF logs, which clearly showed the UE state as `5GMM-DEREGISTERED`, confirming an authentication rejection. Recovery was achieved by restoring the IMSI to the provisioned value (`...001`) and restarting the nrUE, which restored end-to-end connectivity.
+   
+5. Identify two limitations of this simulated environment and explain how they might affect experimental results.
+First, RFsimulator replaces the wireless channel with an idealized, lossless TCP connection, which eliminates real-world RF impairments such as path loss, multipath fading, interference, and Doppler shift. As a result, experimental measurements show artificially optimistic packet loss rates (near 0%) and stable throughput without physical-layer HARQ retransmissions or link adaptation drops. Second, the entire baseband signal processing chain runs in software on general-purpose CPUs inside containers rather than on dedicated hardware accelerators (ASICs/FPGAs). Consequently, host OS thread scheduling jitter, TCP socket buffering, and CPU load constrain maximum achievable bandwidth and add artificial latency variance that does not reflect com
 ## 10. Submission Checklist
 
 Submit one Markdown or PDF report containing:
