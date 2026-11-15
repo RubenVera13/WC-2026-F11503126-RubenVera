@@ -148,23 +148,31 @@ ping -I oaitun_ue1 -c 10 192.168.70.135
 Record:
 
 | Measurement | Observed Value |
-|---|---|
-| UE IP address | |
-| Destination IP | |
-| Packets transmitted | |
-| Packets received | |
-| Packet loss (%) | |
-| Minimum RTT (ms) | |
-| Average RTT (ms) | |
-| Maximum RTT (ms) | |
+|---|---:|
+| UE IP address | 10.0.0.2 |
+| Destination IP | 192.168.70.135 |
+| Packets transmitted | 10 |
+| Packets received | 10 |
+| Packet loss (%) | 0% |
+| Minimum RTT (ms) | 23.340 |
+| Average RTT (ms) | 36.219 |
+| Maximum RTT (ms) | 75.759 |
 
 Take a screenshot of the Ping result.
-
+![Ping_Result](Images/Ping_Result.png)
 **Questions:**
 
 1. Why must Ping use the `oaitun_ue1` interface in this experiment?
+
+   oaitun_ue1 is the virtual TUN network interface created by the OpenAirInterface nrUE (nr-uesoftmodem) and assigned the UE's 5G Core IP address (10.0.0.2). Binding ping to oaitun_ue1 forces the ICMP traffic to enter the 5G UE protocol stack (SDAP, PDCP, RLC, MAC, PHY), traverse the simulated radio interface (RFsimulator) to the gNB, and pass through the 5G Core UPF (GTP-U tunnel over N3) to reach the External Data Network (192.168.70.135). Without specifying -I oaitun_ue1, the Linux host OS would route the ping directly through its standard host/Docker bridge network interface, completely bypassing the simulated 5G RAN and Core.
 2. Does successful Registration guarantee successful user-plane connectivity?
+
+   No. Registration is strictly a control-plane procedure with the AMF that authenticates the UE and attaches it to the network, without allocating an IP address or setting up data paths. User-plane connectivity requires a separate PDU Session Establishment procedure to succeed—where the SMF allocates the UE IP address (10.0.0.2), configures the UPF routing rules/NAT, and establishes both the Data Radio Bearers (DRBs) over the air and the N3 GTP-U tunnel between the gNB and UPF. If PDU Session Establishment, IP routing, or UPF forwarding fails, user-plane traffic will fail even though the UE is registered.
 3. What does a successful Ping prove, and what does it not prove about the simulated 5G system?
+   What it proves: It verifies end-to-end bidirectional IP connectivity across the full 5G stack—confirming that RRC connection, NAS Registration, PDU Session Establishment, IP address allocation (10.0.0.2), baseband signal processing over RFsimulator, gNB-to-UPF GTP-U encapsulation, and External DN routing are all functioning properly for basic control and low-rate data traffic.
+
+What it does not prove: It does not prove real-world RF performance (such as resilience to multipath fading, interference, path loss, or Doppler shift, since RFsimulator uses a lossless TCP channel), high-throughput capacity, strict QoS/low-latency guarantees under heavy load, multi-UE scheduling fairness, or mobility/handover stability across multiple gNBs.
+   
 
 ## 6. Task 4 — Investigate the Effect of Packet Size
 
